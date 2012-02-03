@@ -18,9 +18,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'unicorn'
 gem 'jquery-rails'
 gem 'nokogiri'
-gem 'execjs'
 
 group :test do
   # Pretty printed test output
