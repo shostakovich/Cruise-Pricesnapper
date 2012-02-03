@@ -1,0 +1,9 @@
+<tr>
+  <td><%= link_to cruise.name, cruise %></td>
+  <td>
+      <%-if cruise.prices.count > 0 %>
+        <%= cruise.prices.last.price %> €
+      <%- end %>
+  </td>
+  <td><%= link_to 'Löschen', cruise, confirm: 'Are you sure?', method: :delete, :class => "btn small danger" %></td>
+</tr>

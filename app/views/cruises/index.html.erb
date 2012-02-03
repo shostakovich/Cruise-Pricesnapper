@@ -1,0 +1,15 @@
+<%- content_for :page_header do %>
+    <h1>Übersicht <small>Alle Kreuzfahrten im Überblick</small></h1>
+<%- end %>
+
+<table cellpadding="5" cellspacing="5" border="1">
+  <thead>
+      <tr>
+        <th>Name</th>
+        <th>Preis</th>
+        <th></th>
+      </tr>
+  </thead>
+
+    <%= render @cruises %>
+</table>

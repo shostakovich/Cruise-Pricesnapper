@@ -1,0 +1,58 @@
+<%- content_for :page_header do %>
+    <h1>Detailansicht <small><%= @cruise.name %></small></h1>
+<%- end %>
+
+<%- if notice %>
+    <div class="alert-message notice">
+      <p><%= notice %></p>
+    </div>
+<%- end %>
+
+<div id="chart_div"></div>
+
+<p><%= link_to "auf ehoi besuchen", @cruise.url %></p>
+
+<table>
+  <tr>
+    <td>Datum</td>
+    <td>Preis</td>
+  </tr>
+  <%- @cruise.prices.each do |p|  %>
+    <tr>
+        <td><%= p.created_at %></td>
+        <td><%= p.price %> €</td>
+    </tr>
+  <%- end %>
+</table>
+
+
+<div class="actions">
+    <%= link_to 'Bearbeiten', edit_cruise_path(@cruise), :class => "btn info" %>
+    <%= link_to 'Löschen', @cruise, confirm: 'Are you sure?', method: :delete, :class => "btn danger" %>
+</div>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script type="text/javascript">
+  google.load('visualization', '1.0', {'packages':['corechart']});
+  google.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+      var options = {'title':'Preis Entwicklung',
+                     'width':800,
+                     'height':300};
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('date', 'Datum');
+      data.addColumn('number', 'Preis');
+
+      <%- @cruise.prices.each do |p|  %>
+        var date = new Date(<%= p.created_at.year %>, <%= p.created_at.month %>, <%= p.created_at.day %>, <%= p.created_at.hour %>, <%= p.created_at.min %>);
+
+        data.addRow([date, <%= p.price %>]);
+      <%- end %>
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+  }
+</script>

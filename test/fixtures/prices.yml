@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  cruise_id: 1
+  cabin_type: MyString
+  price: 9.99
+
+two:
+  cruise_id: 1
+  cabin_type: MyString
+  price: 9.99
