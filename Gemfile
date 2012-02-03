@@ -20,6 +20,7 @@ end
 
 gem 'jquery-rails'
 gem 'nokogiri'
+gem 'thin'
 
 group :test do
   # Pretty printed test output
