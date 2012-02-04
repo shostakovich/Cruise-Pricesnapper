@@ -1,9 +1,17 @@
 <tr>
   <td><%= link_to cruise.name, cruise %></td>
   <td>
-      <%-if cruise.prices.count > 0 %>
+      <%-if cruise.has_price %>
         <%= cruise.prices.last.price %> €
       <%- end %>
   </td>
-  <td><%= link_to 'Löschen', cruise, confirm: 'Are you sure?', method: :delete, :class => "btn small danger" %></td>
+  <td>
+    <%-if cruise.has_price %>
+        <%- if cruise.is_cheaper() %>
+            <span class="label success">Billiger</span>
+        <%- elsif cruise.is_more_expensive() %>
+            <span class="label warning">Teurer</span>
+        <%- end %>
+    <%- end %>
+  </td>
 </tr>

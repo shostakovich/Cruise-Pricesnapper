@@ -2,7 +2,7 @@ class CruisesController < ApplicationController
   # GET /cruises
   # GET /cruises.json
   def index
-    @cruises = Cruise.all
+    @cruises = Cruise.all :include => :prices
 
     respond_to do |format|
       format.html # index.html.erb
