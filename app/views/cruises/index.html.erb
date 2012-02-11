@@ -5,9 +5,9 @@
 <table cellpadding="5" cellspacing="5" border="1">
   <thead>
       <tr>
-        <th>Name</th>
-        <th>Preis</th>
-        <th></th>
+        <%= sortable "name" %>
+        <%= sortable "price", "Preis" %>
+        <th class="header">Status</th>
       </tr>
   </thead>
 

@@ -1,6 +1,5 @@
 class Cruise < ActiveRecord::Base
   has_many :prices
-  default_scope order("created_at asc")
 
   validates_presence_of :url, :name
 
