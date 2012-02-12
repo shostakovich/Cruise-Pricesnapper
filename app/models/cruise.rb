@@ -20,10 +20,10 @@ class Cruise < ActiveRecord::Base
   end
 
   def first_price
-    prices.first.price
+    prices.order('created_at ASC').first.price
   end
 
   def last_price
-    prices.last.price
+    prices.order('created_at ASC').last.price
   end
 end
