@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120128192443) do
+ActiveRecord::Schema.define(:version => 20120219122614) do
 
   create_table "cruises", :force => true do |t|
     t.string   "name"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(:version => 20120128192443) do
     t.datetime "updated_at"
   end
 
+  add_index "cruises", ["name"], :name => "index_cruises_on_name"
+
   create_table "prices", :force => true do |t|
     t.integer  "cruise_id"
     t.string   "cabin_type"
@@ -27,5 +29,9 @@ ActiveRecord::Schema.define(:version => 20120128192443) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "prices", ["created_at"], :name => "index_prices_on_created_at"
+  add_index "prices", ["cruise_id"], :name => "index_prices_on_cruise_id"
+  add_index "prices", ["price"], :name => "index_prices_on_price"
 
 end
