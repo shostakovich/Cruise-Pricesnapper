@@ -16,14 +16,11 @@ class Cruise < ActiveRecord::Base
   end
 
   def has_price
-    prices.last != nil
+    first_price > 0
   end
 
-  def first_price
-    prices.order('created_at ASC').first.price
-  end
-
-  def last_price
-    prices.order('created_at ASC').last.price
+  def last_price=(value)
+    write_attribute('last_price', value)
+    write_attribute('first_price', value) if self.first_price == 0
   end
 end

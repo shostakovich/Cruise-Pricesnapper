@@ -2,11 +2,7 @@ class CruisesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    if sort_column == "name"
-      @cruises = Cruise.all(:include => :prices, :order => "name" + " " + sort_direction)
-    else
-      @cruises = Cruise.all(:include => :prices, :order => 'prices.price ' + sort_direction)
-    end
+    @cruises = Cruise.all(:order => sort_column + " " + sort_direction)
   end
 
   def show
@@ -23,6 +19,8 @@ class CruisesController < ApplicationController
 
   def create
     @cruise = Cruise.new(params[:cruise])
+    @cruise.first_price = 0
+    @cruise.last_price = 0
 
     if @cruise.save
       redirect_to @cruise, notice: 'Cruise was successfully created.'
@@ -51,7 +49,7 @@ class CruisesController < ApplicationController
   private
 
   def sort_column
-    params[:sort]  || "name"
+    %w[name last_price].include?(params[:sort]) ? params[:sort] : "name"
   end
 
   def sort_direction
