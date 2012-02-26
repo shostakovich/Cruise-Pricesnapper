@@ -1,9 +1,7 @@
 <tr>
   <td><%= link_to cruise.name, cruise %></td>
   <td>
-      <%-if cruise.has_price %>
-        <%= cruise.last_price %> €
-      <%- end %>
+    <%= cruise.last_price %> €
   </td>
   <td>
     <%- if cruise.is_cheaper() %>
