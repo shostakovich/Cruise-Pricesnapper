@@ -6,10 +6,15 @@ task :cron => :environment do
   Cruise.all.each do |c|
     fetcher = PriceFetcher.new(c.url)
     begin
+      price = fetcher.extract_price()
+
       p = Price.new(
           {:cruise_id => c.id,
-           :price => fetcher.extract_price()})
+           :price => price})
       p.save!
+
+      c.last_price = price
+      c.save!
     rescue Exception => e
       puts e.message
     end
