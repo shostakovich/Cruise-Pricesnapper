@@ -6,12 +6,10 @@
       <%- end %>
   </td>
   <td>
-    <%-if cruise.has_price %>
-        <%- if cruise.is_cheaper() %>
-            <span class="label success">Billiger</span>
-        <%- elsif cruise.is_more_expensive() %>
-            <span class="label warning">Teurer</span>
-        <%- end %>
+    <%- if cruise.is_cheaper() %>
+        <span class="label success">Billiger</span>
+    <%- elsif cruise.is_more_expensive() %>
+        <span class="label warning">Teurer</span>
     <%- end %>
   </td>
 </tr>

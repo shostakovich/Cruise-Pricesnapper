@@ -15,10 +15,6 @@ class Cruise < ActiveRecord::Base
     first_price < last_price
   end
 
-  def has_price
-    first_price > 0
-  end
-
   def last_price=(value)
     write_attribute('last_price', value)
     write_attribute('first_price', value) if self.first_price == 0
