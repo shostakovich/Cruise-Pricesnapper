@@ -24,8 +24,7 @@ end
 class PriceFetcher
   def initialize(url)
     @url = url
-    @doc = open(@url, :proxy => '217.91.234.107:8080')
-    @doc = Nokogiri::HTML()
+    @doc = Nokogiri::HTML(open(@url))
   end
 
   def extract_price
