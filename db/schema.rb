@@ -11,15 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120226155925) do
+ActiveRecord::Schema.define(:version => 20120228192747) do
 
   create_table "cruises", :force => true do |t|
     t.string   "name"
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "last_price"
-    t.decimal  "first_price"
+    t.integer  "last_price"
+    t.integer  "first_price"
   end
 
   add_index "cruises", ["name"], :name => "index_cruises_on_name"
