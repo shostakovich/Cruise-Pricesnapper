@@ -4,8 +4,8 @@ task :cron => :environment do
   require 'open-uri'
 
   Cruise.all.each do |c|
-    fetcher = PriceFetcher.new(c.url)
     begin
+      fetcher = PriceFetcher.new(c.url)
       price = fetcher.extract_price()
 
       p = Price.new(
