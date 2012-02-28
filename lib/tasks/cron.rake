@@ -38,7 +38,7 @@ class PriceFetcher
         end
       end
     else
-      @doc.css('#preistab_div tr.hell:nth-child(2) td:nth-child(2) span').each do |price|
+      @doc.css('#preistab_div tr.hell:nth-child(2) span:nth-child(1)').each do |price|
         price_in_euro = price.content
       end
     end
