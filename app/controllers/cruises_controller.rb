@@ -2,7 +2,11 @@ class CruisesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @cruises = Cruise.all(:order => sort_column + " " + sort_direction)
+    if sort_column == "status"
+      @cruises = Cruise.all(:order => "(first_price - last_price) " + sort_direction)
+    else
+      @cruises = Cruise.all(:order => sort_column + " " + sort_direction)
+    end
   end
 
   def show
@@ -49,7 +53,7 @@ class CruisesController < ApplicationController
   private
 
   def sort_column
-    %w[name last_price].include?(params[:sort]) ? params[:sort] : "name"
+    %w[name status last_price].include?(params[:sort]) ? params[:sort] : "name"
   end
 
   def sort_direction
