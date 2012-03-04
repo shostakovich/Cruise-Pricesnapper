@@ -1,3 +1,5 @@
+require File.expand_path('../../../lib/cruise_price_sampler', __FILE__)
+
 class CruisesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
@@ -27,6 +29,8 @@ class CruisesController < ApplicationController
     @cruise.last_price = 0
 
     if @cruise.save
+      sampler = CruisePriceSampler.new @cruise
+      sampler.take_sample
       redirect_to @cruise, notice: 'Cruise was successfully created.'
     else
       render action: "new"
