@@ -10,17 +10,13 @@ class PriceFetcher
     doc = Nokogiri::HTML(open(@url))
 
     price_in_euro = 0
-    if @url.match /e-hoi/
-      doc.css('.price.clearfix em').each do |price|
-        if price.content.match /ab/
-          price_in_euro = clean_price(price.content)
-        end
-      end
-    else
-      doc.css('#preistab_div tr.hell:nth-child(2) span:nth-child(1)').each do |price|
+
+    doc.css('.price.clearfix em').each do |price|
+      if price.content.match /ab/
         price_in_euro = clean_price(price.content)
       end
     end
+
     raise "Price is 0 on url #{@url}" if price_in_euro == 0
     puts @url + " : " + price_in_euro.to_s
     price_in_euro
