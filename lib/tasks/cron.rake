@@ -15,3 +15,12 @@ task :clean_prices => :environment do
     cleaner.delete_useless_prices cruise
   end
 end
+
+task :take_screenshot => :environment do
+  Cruise.where(:has_screenshot => false).each do |cruise|
+    cmd = "phantomjs rasterize.js '#{cruise.url}' ./public/images/cruises/#{cruise.id}.jpg"
+    system(cmd)
+    cruise.has_screenshot = true
+    cruise.save
+  end
+end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120228192747) do
+ActiveRecord::Schema.define(:version => 20120407140948) do
 
   create_table "cruises", :force => true do |t|
     t.string   "name"
@@ -20,16 +20,17 @@ ActiveRecord::Schema.define(:version => 20120228192747) do
     t.datetime "updated_at"
     t.integer  "last_price"
     t.integer  "first_price"
+    t.boolean  "has_screenshot", :default => false
   end
 
   add_index "cruises", ["name"], :name => "index_cruises_on_name"
 
   create_table "prices", :force => true do |t|
-    t.integer  "cruise_id"
-    t.string   "cabin_type"
-    t.integer  "price"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "cruise_id"
+    t.string    "cabin_type"
+    t.integer   "price"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "prices", ["created_at"], :name => "index_prices_on_created_at"
