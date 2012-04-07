@@ -10,8 +10,11 @@
 
 <div id="chart_div"></div>
 
-<p><%= link_to "Im Web besuchen", @cruise.url %></p>
-
+<p><%= link_to "Im Web besuchen", @cruise.url %>
+  <%- if @cruise.has_screenshot %>
+    | <%= link_to "Screenshot betrachten", "/images/cruises/#{@cruise.id}.jpg" %>
+  <%- end %>
+</p>
 <table>
   <tr>
     <td>Datum</td>
