@@ -11,8 +11,8 @@
 <p>
   <%- if @cruise.has_screenshot %>
     <%= link_to( 
-        image_tag("/images/cruises/#{@cruise.id}_preview.jpg", :width => 400, :height => 300),
-        "/images/cruises/#{@cruise.id}.jpg")  %>
+        image_tag("/images/cruises/#{@cruise.id}_preview.png", :width => 400, :height => 300),
+        "/images/cruises/#{@cruise.id}.png")  %>
   <% end %>
   <span id="chart_div"></span>
 </p>
@@ -21,7 +21,7 @@
     <%= link_to "Im Web besuchen", @cruise.url, :class => "btn success" %>
     
     <%- if @cruise.has_screenshot %>
-      <%= link_to "Screenshot betrachten", "/images/cruises/#{@cruise.id}.jpg", :class => "btn info" %>
+      <%= link_to "Screenshot betrachten", "/images/cruises/#{@cruise.id}.png", :class => "btn info" %>
     <% end %>
 
     <%= link_to 'Bearbeiten', edit_cruise_path(@cruise), :class => "btn" %>

@@ -19,8 +19,8 @@ end
 task :take_screenshot => :environment do
   Cruise.where(:has_screenshot => false).each do |cruise|
     screenshot_dir = "./public/images/cruises/"
-    big_screenshot = "#{screenshot_dir}#{cruise.id}.jpg"
-    screenshot_preview = "#{screenshot_dir}#{cruise.id}_preview.jpg"
+    big_screenshot = "#{screenshot_dir}#{cruise.id}.png"
+    screenshot_preview = "#{screenshot_dir}#{cruise.id}_preview.png"
 
     system "phantomjs rasterize.js '#{cruise.url}' #{big_screenshot}"
     
