@@ -17,7 +17,7 @@ task :clean_prices => :environment do
 end
 
 task :take_screenshot => :environment do
-  Cruise.limit(2).each do |cruise|
+  Cruise.where(:has_screenshot => false).each do |cruise|
     screenshot_dir = "./public/images/cruises/"
     big_screenshot = "#{screenshot_dir}#{cruise.id}.jpg"
     screenshot_preview = "#{screenshot_dir}#{cruise.id}_preview.jpg"
