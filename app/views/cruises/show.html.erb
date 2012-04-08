@@ -8,19 +8,33 @@
     </div>
 <%- end %>
 
-<%= image_tag "/images/cruises/#{@cruise.id}_preview.jpg", :width => 400, :height => 300, :id => "cruise_thumb"  %>
-<div id="chart_div"></div>
-
-<p><%= link_to "Im Web besuchen", @cruise.url %>
+<p>
   <%- if @cruise.has_screenshot %>
-    | <%= link_to "Screenshot betrachten", "/images/cruises/#{@cruise.id}.jpg" %>
-  <%- end %>
+    <%= link_to( 
+        image_tag("/images/cruises/#{@cruise.id}_preview.jpg", :width => 400, :height => 300),
+        "/images/cruises/#{@cruise.id}.jpg")  %>
+  <% end %>
+  <span id="chart_div"></span>
 </p>
+
+<div class="actions form-stacked">
+    <%= link_to "Im Web besuchen", @cruise.url, :class => "btn success" %>
+    
+    <%- if @cruise.has_screenshot %>
+      <%= link_to "Screenshot betrachten", "/images/cruises/#{@cruise.id}.jpg", :class => "btn info" %>
+    <% end %>
+
+    <%= link_to 'Bearbeiten', edit_cruise_path(@cruise), :class => "btn" %>
+    <%= link_to 'Löschen', @cruise, confirm: 'Are you sure?', method: :delete, :class => "btn danger" %>
+</div>
+
 <table>
-  <tr>
-    <td>Datum</td>
-    <td>Preis</td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Datum</th>
+      <th>Preis</th>
+    </tr>
+  </thead>
   <%- @cruise.prices.each do |p|  %>
     <tr>
         <td><%= p.created_at %></td>
@@ -30,10 +44,7 @@
 </table>
 
 
-<div class="actions">
-    <%= link_to 'Bearbeiten', edit_cruise_path(@cruise), :class => "btn info" %>
-    <%= link_to 'Löschen', @cruise, confirm: 'Are you sure?', method: :delete, :class => "btn danger" %>
-</div>
+
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
