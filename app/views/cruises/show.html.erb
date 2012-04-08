@@ -8,6 +8,7 @@
     </div>
 <%- end %>
 
+<%= image_tag "/images/cruises/#{@cruise.id}_preview.jpg", :width => 400, :height => 300, :id => "cruise_thumb"  %>
 <div id="chart_div"></div>
 
 <p><%= link_to "Im Web besuchen", @cruise.url %>
@@ -41,9 +42,7 @@
   google.setOnLoadCallback(drawChart);
 
   function drawChart() {
-      var options = {'title':'Preis Entwicklung',
-                     'width':800,
-                     'height':300};
+    var options = {'width':500, 'height':300, 'legend': {'position' : 'none'}};
 
       var data = new google.visualization.DataTable();
       data.addColumn('date', 'Datum');

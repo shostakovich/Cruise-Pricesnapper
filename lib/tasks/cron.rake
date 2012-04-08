@@ -17,9 +17,16 @@ task :clean_prices => :environment do
 end
 
 task :take_screenshot => :environment do
-  Cruise.where(:has_screenshot => false).each do |cruise|
-    cmd = "phantomjs rasterize.js '#{cruise.url}' ./public/images/cruises/#{cruise.id}.jpg"
-    system(cmd)
+  Cruise.limit(2).each do |cruise|
+    screenshot_dir = "./public/images/cruises/"
+    big_screenshot = "#{screenshot_dir}#{cruise.id}.jpg"
+    screenshot_preview = "#{screenshot_dir}#{cruise.id}_preview.jpg"
+
+    system "phantomjs rasterize.js '#{cruise.url}' #{big_screenshot}"
+    
+    system "convert #{big_screenshot} -crop 1024x768+163+700 #{screenshot_preview}"
+    system "convert #{screenshot_preview} -resize 400x300 #{screenshot_preview}"
+
     cruise.has_screenshot = true
     cruise.save
   end
