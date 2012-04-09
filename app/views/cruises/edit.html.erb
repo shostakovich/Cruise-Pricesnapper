@@ -2,4 +2,25 @@
     <h1>Kreuzfahrt bearbeiten</h1>
 <%- end %>
 
-<%= render 'form' %>
+<%= form_for(@cruise) do |f| %>
+  <% if @cruise.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cruise.errors.count, "error") %> prohibited this cruise from being saved:</h2>
+
+      <ul>
+      <% @cruise.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_field(f, :url, "e-hoi Url") %>    
+  <%= form_field(f, :name, "Name der Cruise") %> 
+  <%= form_field(f, :ship, "Schiffsname") %>    
+  <%= form_field(f, :cruiseline, "Reederei") %>    
+  
+  <div class="actions">
+    <%= f.submit "Kreuzfahrt bearbeiten", :class => "btn primary" %>
+  </div>
+<% end %>

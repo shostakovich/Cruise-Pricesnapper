@@ -1,8 +1,7 @@
 <tr>
+  <td><%= cruise.ship %></td>
   <td><%= link_to cruise.name, cruise %></td>
-  <td>
-    <%= cruise.last_price %> €
-  </td>
+  <td><%= cruise.last_price %> €</td>
   <td>
     <%- if cruise.is_cheaper() %>
         <span class="label success">Billiger</span>
