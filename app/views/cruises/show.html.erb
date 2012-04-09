@@ -1,5 +1,7 @@
 <%- content_for :page_header do %>
-    <h1>Detailansicht <small><%= @cruise.name %></small></h1>
+    <h1>Detailansicht 
+      <small><%= @cruise.ship %> - <%= @cruise.name %></small>
+    </h1>
 <%- end %>
 
 <%- if notice %>
