@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120407140948) do
+ActiveRecord::Schema.define(:version => 20120409135012) do
 
   create_table "cruises", :force => true do |t|
     t.string   "name"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(:version => 20120407140948) do
     t.integer  "last_price"
     t.integer  "first_price"
     t.boolean  "has_screenshot", :default => false
+    t.string   "ship"
+    t.string   "cruiseline"
   end
 
   add_index "cruises", ["name"], :name => "index_cruises_on_name"
