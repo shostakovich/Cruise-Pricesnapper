@@ -1,4 +1,5 @@
 require File.expand_path('../../../lib/cruise_price_sampler', __FILE__)
+require File.expand_path('../../../lib/cruise_populator', __FILE__)
 
 class CruisesController < ApplicationController
   helper_method :sort_column, :sort_direction
@@ -25,11 +26,10 @@ class CruisesController < ApplicationController
 
   def create
     @cruise = Cruise.new(params[:cruise])
-    @cruise.first_price = 0
-    @cruise.last_price = 0
-
+    @cruise = CruisePopulator.populate(@cruise)
+    
     if @cruise.save
-      sampler = CruisePriceSampler.new @cruise
+      sampler = CruisePriceSampler.new(@cruise)
       sampler.take_sample
       redirect_to @cruise, notice: 'Cruise was successfully created.'
     else
@@ -57,7 +57,7 @@ class CruisesController < ApplicationController
   private
 
   def sort_column
-    %w[name status last_price].include?(params[:sort]) ? params[:sort] : "name"
+    %w[name status last_price ship].include?(params[:sort]) ? params[:sort] : "name"
   end
 
   def sort_direction
