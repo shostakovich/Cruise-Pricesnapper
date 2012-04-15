@@ -57,7 +57,7 @@ class CruisesController < ApplicationController
   private
 
   def sort_column
-    %w[name status last_price ship].include?(params[:sort]) ? params[:sort] : "name"
+    %w[name status last_price ship].include?(params[:sort]) ? params[:sort] : "ship"
   end
 
   def sort_direction
