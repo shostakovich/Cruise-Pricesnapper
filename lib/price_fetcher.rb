@@ -11,6 +11,8 @@ class PriceFetcher
 
     price_in_euro = 0
 
+    return 0 if is_cruise_expired(doc)
+
     doc.css('.price.clearfix em').each do |price|
       if price.content.match /ab/
         price_in_euro = clean_price(price.content)
@@ -20,6 +22,10 @@ class PriceFetcher
     raise "Price is 0 on url #{@url}" if price_in_euro == 0
     puts @url + " : " + price_in_euro.to_s
     price_in_euro
+  end
+
+  def is_cruise_expired(doc)
+    doc.css("p:contains('Diese Kreuzfahrtroute existiert leider nicht.')")
   end
 
   def clean_price(price)
